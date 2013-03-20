@@ -256,6 +256,7 @@ int mdp4_dtv_pipe_commit(int cndx, int wait)
 			pipe->pipe_used = 0; /* clear */
 		}
 	}
+
 	pipe = vctrl->base_pipe;
 	spin_lock_irqsave(&vctrl->spin_lock, flags);
 	if (pipe->ov_blt_addr) {
@@ -349,9 +350,9 @@ void mdp4_dtv_wait4vsync(int cndx)
 
 	if (atomic_read(&vctrl->suspend) > 0)
 		return;
-	
+
 	mdp4_dtv_vsync_irq_ctrl(cndx, 1);
-	
+
 	spin_lock_irqsave(&vctrl->spin_lock, flags);
 
 	if (vctrl->wait_vsync_cnt == 0)
@@ -362,7 +363,7 @@ void mdp4_dtv_wait4vsync(int cndx)
 	wait_for_completion(&vctrl->vsync_comp);
 	mdp4_dtv_vsync_irq_ctrl(cndx, 0);
 	mdp4_stat.wait4vsync1++;
-	
+
 }
 
 static void mdp4_dtv_wait4dmae(int cndx)
@@ -401,6 +402,7 @@ ssize_t mdp4_dtv_show_event(struct device *dev,
 		!external_common_state->hpd_state ||
 		atomic_read(&vctrl->vsync_resume) == 0)
 		return 0;
+
 	/*
 	 * show_event thread keep spinning on vctrl->vsync_comp
 	 * race condition on x.done if multiple thread blocked
@@ -940,7 +942,6 @@ void mdp4_external_vsync_dtv(void)
 
 	complete_all(&vctrl->vsync_comp);
 	vctrl->wait_vsync_cnt = 0;
-
 	spin_unlock(&vctrl->spin_lock);
 }
 
