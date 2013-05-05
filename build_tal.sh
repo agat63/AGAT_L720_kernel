@@ -127,7 +127,7 @@ fi
 # clear
 echo -e "${TXTYLW}CleanUP done, starting modules Build ...${TXTCLR}"
 
-nice -n 10 make -j8 modules 2>&1 | tee compile-zImage.log
+nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-eabi-4.4.3/bin/arm-eabi-gcc" modules 2>&1 | tee compile-modules.log
 
 #
 if [ "$?" == "0" ];
@@ -185,7 +185,7 @@ sleep 1
 # Start Final Kernel Build
 #
 echo -e "${TXTYLW}Starting final Build: Stage 2${TXTCLR}"
-nice -n 10 make -j8 zImage 2>&1 | tee compile-zImage.log
+nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-eabi-4.4.3/bin/arm-eabi-gcc" zImage 2>&1 | tee compile-zImage.log
 
 if [ -f  $KERNELDIR/arch/arm/boot/zImage ];
 then
@@ -271,4 +271,4 @@ else
   exit 1
 fi
 
-geany ~/logs/$version.txt || exit 1
+
