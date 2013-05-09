@@ -1,0 +1,163 @@
+  HOSTCC  scripts/basic/fixdep
+  HOSTCC  scripts/kconfig/conf.o
+  HOSTCC  scripts/kconfig/zconf.tab.o
+  HOSTLD  scripts/kconfig/conf
+scripts/kconfig/conf --silentoldconfig Kconfig
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ARCH_MSM_KRAITMP && ARCH_MSM_CORTEX_A5) selects HAVE_HW_BRKPT_RESERVED_RW_ACCESS which has unmet direct dependencies (HAVE_HW_BREAKPOINT)
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ARCH_MSM_KRAITMP && ARCH_MSM_CORTEX_A5) selects HAVE_HW_BRKPT_RESERVED_RW_ACCESS which has unmet direct dependencies (HAVE_HW_BREAKPOINT)
+  WRAP    arch/arm/include/generated/asm/auxvec.h
+  WRAP    arch/arm/include/generated/asm/bitsperlong.h
+  WRAP    arch/arm/include/generated/asm/cputime.h
+  WRAP    arch/arm/include/generated/asm/emergency-restart.h
+  WRAP    arch/arm/include/generated/asm/errno.h
+  WRAP    arch/arm/include/generated/asm/irq_regs.h
+  WRAP    arch/arm/include/generated/asm/ioctl.h
+  WRAP    arch/arm/include/generated/asm/kdebug.h
+  WRAP    arch/arm/include/generated/asm/local.h
+  WRAP    arch/arm/include/generated/asm/local64.h
+  WRAP    arch/arm/include/generated/asm/percpu.h
+  WRAP    arch/arm/include/generated/asm/poll.h
+  WRAP    arch/arm/include/generated/asm/resource.h
+  WRAP    arch/arm/include/generated/asm/sections.h
+  WRAP    arch/arm/include/generated/asm/siginfo.h
+  WRAP    arch/arm/include/generated/asm/sizes.h
+  CHK     include/linux/version.h
+  UPD     include/linux/version.h
+  CHK     include/generated/utsrelease.h
+  UPD     include/generated/utsrelease.h
+  HOSTCC  scripts/genksyms/genksyms.o
+  Generating include/generated/mach-types.h
+  SHIPPED scripts/genksyms/lex.lex.c
+  SHIPPED scripts/genksyms/keywords.hash.c
+  SHIPPED scripts/genksyms/parse.tab.h
+  SHIPPED scripts/genksyms/parse.tab.c
+  CC      scripts/mod/empty.o
+  HOSTCC  scripts/mod/mk_elfconfig
+  CC      kernel/bounds.s
+  HOSTCC  scripts/genksyms/lex.lex.o
+  GEN     include/generated/bounds.h
+  CC      arch/arm/kernel/asm-offsets.s
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/file2alias.o
+  HOSTCC  scripts/mod/modpost.o
+  GEN     include/generated/asm-offsets.h
+  CALL    scripts/checksyscalls.sh
+  HOSTCC  scripts/genksyms/parse.tab.o
+  HOSTCC  scripts/mod/sumversion.o
+  HOSTCC  scripts/kallsyms
+  HOSTCC  scripts/selinux/genheaders/genheaders
+  HOSTCC  scripts/conmakehash
+  HOSTCC  scripts/bin2c
+  HOSTLD  scripts/genksyms/genksyms
+  HOSTCC  scripts/selinux/mdp/mdp
+  HOSTLD  scripts/mod/modpost
+  CC [M]  arch/arm/mach-msm/reset_modem.o
+  CC [M]  arch/arm/mach-msm/dma_test.o
+  CC [M]  arch/arm/mach-msm/msm-buspm-dev.o
+  CC [M]  crypto/ansi_cprng.o
+  CC [M]  block/test-iosched.o
+  CC [M]  drivers/crypto/msm/qcedev.o
+  CC [M]  drivers/crypto/msm/qce40.o
+  CC [M]  drivers/crypto/msm/qcrypto.o
+  CC [M]  drivers/gud/mobicore_driver/logging.o
+  CC [M]  drivers/gud/mobicore_driver/ops.o
+  CC [M]  drivers/gud/mobicore_driver/mem.o
+  CC [M]  drivers/gud/mobicore_driver/api.o
+  CC [M]  drivers/input/evbug.o
+  CC [M]  drivers/interceptor/kernel_alloc.o
+  CC [M]  drivers/gud/mobicore_driver/main.o
+  CC [M]  drivers/interceptor/kernel_encode.o
+  CC [M]  drivers/gud/mobicore_kernelapi/main.o
+  CC [M]  drivers/gud/mobicore_kernelapi/clientlib.o
+  CC [M]  drivers/interceptor/linux_hook_magic.o
+  CC [M]  drivers/mmc/card/mmc_test.o
+  CC [M]  drivers/media/video/gspca/gspca.o
+  CC [M]  drivers/gud/mobicore_kernelapi/device.o
+  CC [M]  drivers/interceptor/linux_iface.o
+  CC [M]  drivers/gud/mobicore_kernelapi/session.o
+  CC [M]  drivers/scsi/scsi_wait_scan.o
+  CC [M]  drivers/interceptor/linux_ip_glue.o
+  CC [M]  drivers/gud/mobicore_kernelapi/connection.o
+  CC [M]  drivers/interceptor/linux_ipm.o
+  CC [M]  drivers/spi/spidev.o
+  LD [M]  drivers/gud/mckernelapi.o
+  CC [M]  drivers/interceptor/linux_kernel_alloc.o
+  LD [M]  drivers/media/video/gspca/gspca_main.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh.o
+  LD [M]  drivers/gud/mcdrvmodule.o
+  CC [M]  drivers/interceptor/linux_main.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh_linux.o
+  CC [M]  drivers/interceptor/linux_usermode.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh_sdmmc.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh_sdmmc_linux.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_cdc.o
+  CC [M]  drivers/interceptor/linux_virtual_adapter.o
+  CC [M]  drivers/interceptor/linux_mutex.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_common.o
+  CC [M]  drivers/interceptor/linux_packet.o
+  CC [M]  drivers/interceptor/linux_procfs.o
+  CC [M]  drivers/interceptor/linux_route.o
+  CC [M]  drivers/interceptor/sshinetbits.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_custom_gpio.o
+  CC [M]  drivers/interceptor/sshinetencode.o
+  CC [M]  drivers/interceptor/sshinetprint.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_custom_sec.o
+  CC [M]  drivers/interceptor/usermodeforwarder.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_linux.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_linux_sched.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_cfg80211.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_sdio.o
+  CC [M]  drivers/net/wireless/bcmdhd/aiutils.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmevent.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmutils.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmwifi_channels.o
+  CC [M]  drivers/net/wireless/bcmdhd/hndpmu.o
+  CC [M]  drivers/net/wireless/bcmdhd/linux_osl.o
+  CC [M]  drivers/net/wireless/bcmdhd/sbutils.o
+  CC [M]  drivers/net/wireless/bcmdhd/siutils.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_android.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_cfg80211.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_cfgp2p.o
+  CC [M]  drivers/net/wireless/bcmdhd/wldev_common.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_linux_mon.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_roam.o
+  LD [M]  drivers/interceptor/vpnclient.o
+  LD [M]  drivers/net/wireless/bcmdhd/dhd.o
+  Building modules, stage 2.
+  MODPOST 17 modules
+  CC      arch/arm/mach-msm/dma_test.mod.o
+  CC      arch/arm/mach-msm/msm-buspm-dev.mod.o
+  CC      arch/arm/mach-msm/reset_modem.mod.o
+  CC      block/test-iosched.mod.o
+  CC      crypto/ansi_cprng.mod.o
+  CC      drivers/crypto/msm/qce40.mod.o
+  CC      drivers/crypto/msm/qcedev.mod.o
+  CC      drivers/crypto/msm/qcrypto.mod.o
+  CC      drivers/gud/mcdrvmodule.mod.o
+  CC      drivers/gud/mckernelapi.mod.o
+  CC      drivers/input/evbug.mod.o
+  CC      drivers/interceptor/vpnclient.mod.o
+  CC      drivers/media/video/gspca/gspca_main.mod.o
+  CC      drivers/mmc/card/mmc_test.mod.o
+  CC      drivers/net/wireless/bcmdhd/dhd.mod.o
+  CC      drivers/scsi/scsi_wait_scan.mod.o
+  CC      drivers/spi/spidev.mod.o
+  LD [M]  arch/arm/mach-msm/dma_test.ko
+  LD [M]  arch/arm/mach-msm/msm-buspm-dev.ko
+  LD [M]  block/test-iosched.ko
+  LD [M]  drivers/crypto/msm/qce40.ko
+  LD [M]  drivers/crypto/msm/qcedev.ko
+  LD [M]  drivers/crypto/msm/qcrypto.ko
+  LD [M]  drivers/gud/mcdrvmodule.ko
+  LD [M]  drivers/gud/mckernelapi.ko
+  LD [M]  drivers/media/video/gspca/gspca_main.ko
+  LD [M]  drivers/mmc/card/mmc_test.ko
+  LD [M]  drivers/scsi/scsi_wait_scan.ko
+  LD [M]  arch/arm/mach-msm/reset_modem.ko
+  LD [M]  drivers/net/wireless/bcmdhd/dhd.ko
+  LD [M]  drivers/spi/spidev.ko
+  LD [M]  drivers/interceptor/vpnclient.ko
+  LD [M]  drivers/input/evbug.ko
+  LD [M]  crypto/ansi_cprng.ko
