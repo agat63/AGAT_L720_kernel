@@ -17,21 +17,20 @@ TXTCLR='\e[0m'    		# Text Reset
 ODIN_TAR=yes		# yes/no
 
 ## Create ZIP File for CWM? (needs a updater-template.zip in releasedir)
-CWM_ZIP=no		# yes/no
+CWM_ZIP=yes		# yes/no
 
 ##
 ## Directory Settings
 ##
 export KERNELDIR=`readlink -f .`
 export TOOLBIN="${KERNELDIR}/../bin"
-export INITRAMFS_SOURCE="${KERNELDIR}/../initramfs-sgs4-sprint"
-export INITRAMFS_TMP="/tmp/initramfs-sgs4-sprint"
+export INITRAMFS_SOURCE="${KERNELDIR}/../initramfs"
+export INITRAMFS_TMP="/tmp/initramfs-i9505"
 export RELEASEDIR="${KERNELDIR}/../releases"
-export USE_CCACHE=1
 
-# Target
-export AGAT_DEFCONF=agat_defconfig
-export ARCH_CONF=jf_spr_defconfig
+# Target Configs ...
+export DREAM_DEFCONF=dream_i9505_defconfig
+export ARCH_CONF=jf_eur_defconfig
 export SELINUX_CONF=jfselinux_defconfig
 export SELINUX_LOGCONF=jfselinux_log_defconfig
 
@@ -41,27 +40,21 @@ time_start=$(date +%s.%N)
 # InitRamFS Branch to use ...
 # export RAMFSBRANCH=cm10-testing
 
-rm -fv $KERNELDIR/compile-*.log
-
 # Build Hostname
-# export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
+export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
 
 #
 # Version of this Build
 #
 ## 1.0 for initial build
-<<<<<<< HEAD:build_tal.sh
-KRNRLS="AGAT_GS4_v0.1.0"
-=======
 KRNRLS="DreamKernel-GT-I9505-v1.0.0"
->>>>>>> 2c5fdd3... Update Kernel versions string, enable ROW IOSched:build_kernel.sh
 
 
 #
 # Target Settings
 #
 export ARCH=arm
-export CROSS_COMPILE=/home/agat/GS4/kernel-extras/arm-eabi-4.6/bin/arm-eabi-
+export CROSS_COMPILE=/home/talustus/arm-galaxys2-androideabi/bin/galaxys2-
 export USE_SEC_FIPS_MODE=true
 
 if [ "${1}" != "" ];
@@ -81,15 +74,15 @@ then
 fi
 
 # make sure we have no stale config
-make -j8 distclean
+make -j8 distclean 2>&1 | grcat conf.gcc
 
 if [ ! -f $KERNELDIR/.config ];
 then
-  if [ ! -f $KERNELDIR/arch/arm/configs/$AGAT_DEFCONF ];
+  if [ ! -f $KERNELDIR/arch/arm/configs/$DREAM_DEFCONF ];
   then
     clear
     echo -e "  "
-    echo -e "${BLDRED}Error: can not find default Kernel Config: ${AGAT_DEFCONF} !${TXTCLR}"
+    echo -e "${BLDRED}Error: can not find default Kernel Config: ${DREAM_DEFCONF} !${TXTCLR}"
     echo -e "${BLDRED}Critical Error, Exiting ... !${TXTCLR}"
     echo -e "  "
     # finished? get elapsed time
@@ -98,8 +91,9 @@ then
     echo -e "  "
     exit 1
   fi
-  echo -e "${TXTYLW}Creating Kernel config from default: ${AGAT_DEFCONF} ${TXTCLR}"
-  make ARCH=arm VARIANT_DEFCONFIG=${ARCH_CONF} SELINUX_DEFCONFIG=${SELINUX_CONF} SELINUX_LOG_DEFCONFIG=${SELINUX_LOGCONF} ${AGAT_DEFCONF} 
+  echo -e "${TXTYLW}Creating Kernel config from default: ${DREAM_DEFCONF} ${TXTCLR}"
+  # make ARCH=arm VARIANT_DEFCONFIG=${ARCH_CONF} SELINUX_DEFCONFIG=${SELINUX_CONF} SELINUX_LOG_DEFCONFIG=${SELINUX_LOGCONF} ${DREAM_DEFCONF}  2>&1 | grcat conf.gcc
+  make ARCH=arm VARIANT_DEFCONFIG=${ARCH_CONF} SELINUX_DEFCONFIG=${SELINUX_CONF} ${DREAM_DEFCONF}  2>&1 | grcat conf.gcc
   echo -e "${TXTYLW}Kernel config created ...${TXTCLR}"
 fi
 
@@ -108,7 +102,7 @@ fi
 # remove Files of old/previous Builds
 #
 echo -e "${TXTYLW}Deleting Files of previous Builds ...${TXTCLR}"
-make -j8 clean
+# make -j8 clean 2>&1 | grcat conf.gcc
 # echo "0" > $KERNELDIR/.version
 
 # Remove Old initramfs
@@ -131,7 +125,7 @@ fi
 # clear
 echo -e "${TXTYLW}CleanUP done, starting modules Build ...${TXTCLR}"
 
-nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-eabi-4.4.3/bin/arm-eabi-gcc" modules 2>&1 | tee compile-modules.log
+nice -n 10 make -j8 modules 2>&1 | grcat conf.gcc
 
 #
 if [ "$?" == "0" ];
@@ -189,7 +183,7 @@ sleep 1
 # Start Final Kernel Build
 #
 echo -e "${TXTYLW}Starting final Build: Stage 2${TXTCLR}"
-nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-eabi-4.4.3/bin/arm-eabi-gcc" zImage 2>&1 | tee compile-zImage.log
+nice -n 10 make -j8 zImage 2>&1 | grcat conf.gcc
 
 if [ -f  $KERNELDIR/arch/arm/boot/zImage ];
 then
@@ -274,5 +268,3 @@ else
   echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
-
-
