@@ -163,12 +163,12 @@ echo -e "${TXTGRN}Copying Modules to initramfs: ${INITRAMFS_TMP}/lib/modules${TX
 
 mkdir -pv $INITRAMFS_TMP/lib/modules
 # find $KERNELDIR -name '*.ko' -exec cp -av {} $INITRAMFS_TMP/lib/modules/ \;
-find -name '*.ko' -exec cp -av {} $RELEASEDIR/zip/system/lib/modules/ \;
+find -name '*.ko' -exec cp -av {} $RELEASEDIR/tempdir/system/lib/modules/ \;
 sleep 1
 
 echo -e "${TXTGRN}Striping Modules to save space${TXTCLR}"
 # ${CROSS_COMPILE}strip --strip-unneeded $INITRAMFS_TMP/lib/modules/*
-${CROSS_COMPILE}strip --strip-unneeded $RELEASEDIR/zip/system/lib/modules/*
+${CROSS_COMPILE}strip --strip-unneeded $RELEASEDIR/tempdir/system/lib/modules/*
 sleep 1
 
 # create the initramfs cpio archive
@@ -216,6 +216,7 @@ then
     then
       echo -e "${BLDRED}creating ODIN-Flashable TAR: ${ARCNAME}${TXTCLR}"
       cd $KERNELDIR
+      cp boot.img $RELEASEDIR/tempdir/boot.img
       tar cf $RELEASEDIR/$ARCNAME.tar boot.img
       echo -e "${BLDRED}$(ls -lh ${RELEASEDIR}/${ARCNAME}.tar)${TXTCLR}"
     else
@@ -236,7 +237,8 @@ then
     then
       echo -e "${BLDRED}creating CWM-Flashable ZIP: ${ARCNAME}-CWM.zip${TXTCLR}"
       cp $RELEASEDIR/updater-template.zip $RELEASEDIR/$ARCNAME-CWM.zip
-      zip -u $RELEASEDIR/$ARCNAME-CWM.zip boot.img
+      cd $RELEASEDIR/tempdir
+      zip -r $RELEASEDIR/$ARCNAME-CWM.zip ./
       ls -lh $RELEASEDIR/$ARCNAME-CWM.zip
       echo -e "${BLDRED}$(ls -lh ${RELEASEDIR}/${ARCNAME}-CWM.zip)${TXTCLR}"
       echo -e "  "
