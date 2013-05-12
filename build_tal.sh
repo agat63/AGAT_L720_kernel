@@ -42,7 +42,8 @@ time_start=$(date +%s.%N)
 # export RAMFSBRANCH=cm10-testing
 
 rm -fv $KERNELDIR/compile-*.log
-
+rm -fv $RELEASEDIR/tempdir/system/lib/modules/*.ko
+rm -fv $RELEASEDIR/tempdir/boot.img
 # Build Hostname
 # export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
 
@@ -202,6 +203,7 @@ then
   $TOOLBIN/mkbootimg --kernel $KERNELDIR/arch/arm/boot/kernel --ramdisk $INITRAMFS_TMP.img --cmdline "console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3" --base 0x80200000 --pagesize 2048 --ramdisk_offset 0x02000000 --output $KERNELDIR/boot.img
 
   if [ -f $KERNELDIR/boot.img ];
+  cp -v boot.img $RELEASEDIR/tempdir/boot.img
   then
     echo " "
     echo -e "${TXTGRN}Final Build: Stage 3 completed successfully!${TXTCLR}"
@@ -216,7 +218,6 @@ then
     then
       echo -e "${BLDRED}creating ODIN-Flashable TAR: ${ARCNAME}${TXTCLR}"
       cd $KERNELDIR
-      cp boot.img $RELEASEDIR/tempdir/boot.img
       tar cf $RELEASEDIR/$ARCNAME.tar boot.img
       echo -e "${BLDRED}$(ls -lh ${RELEASEDIR}/${ARCNAME}.tar)${TXTCLR}"
     else
