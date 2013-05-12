@@ -162,11 +162,13 @@ rm -rf $INITRAMFS_TMP/.hg
 echo -e "${TXTGRN}Copying Modules to initramfs: ${INITRAMFS_TMP}/lib/modules${TXTCLR}"
 
 mkdir -pv $INITRAMFS_TMP/lib/modules
-find $KERNELDIR -name '*.ko' -exec cp -av {} $INITRAMFS_TMP/lib/modules/ \;
+# find $KERNELDIR -name '*.ko' -exec cp -av {} $INITRAMFS_TMP/lib/modules/ \;
+find -name '*.ko' -exec cp -av {} $RELEASEDIR/zip/system/lib/modules/ \;
 sleep 1
 
 echo -e "${TXTGRN}Striping Modules to save space${TXTCLR}"
-${CROSS_COMPILE}strip --strip-unneeded $INITRAMFS_TMP/lib/modules/*
+# ${CROSS_COMPILE}strip --strip-unneeded $INITRAMFS_TMP/lib/modules/*
+${CROSS_COMPILE}strip --strip-unneeded $RELEASEDIR/zip/system/lib/modules/*
 sleep 1
 
 # create the initramfs cpio archive
