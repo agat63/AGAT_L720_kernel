@@ -992,7 +992,7 @@ void acpuclk_set_vdd(unsigned int khz, int vdd_uv) {
 #endif	/* CONFIG_CPU_VOTALGE_TABLE */
 
 #ifdef CONFIG_CPU_FREQ_MSM
-static struct cpufreq_frequency_table freq_table[NR_CPUS][FREQ_TABLE_SIZE];
+static struct cpufreq_frequency_table freq_table[NR_CPUS][39];
 extern int console_batt_stat;
 static void __init cpufreq_table_init(void)
 {
