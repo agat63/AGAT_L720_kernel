@@ -72,7 +72,7 @@ then
     echo -e "${BLDRED}Nothing todo, Exiting ... !${TXTCLR}"
     # finished? get elapsed time
     time_end=$(date +%s.%N)
-    echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
+    echo -e "${BLDYLW}Total time elapsed: ${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
     exit 1
   fi
 fi
@@ -91,7 +91,7 @@ then
     echo -e "  "
     # finished? get elapsed time
     time_end=$(date +%s.%N)
-    echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
+    echo -e "${BLDYLW}Total time elapsed: ${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
     echo -e "  "
     exit 1
   fi
@@ -202,7 +202,7 @@ else
   echo " "
   # finished? get elapsed time
   time_end=$(date +%s.%N)
-  echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
+  echo -e "${BLDYLW}Total time elapsed: ${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
 
@@ -218,7 +218,7 @@ else
   echo -e "${BLDRED}Modules Build failed, exiting  ...${TXTCLR}"
   # finished? get elapsed time
   time_end=$(date +%s.%N)
-  echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
+  echo -e "${BLDYLW}Total time elapsed: ${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
 
@@ -246,7 +246,7 @@ else
   echo -e "${BLDRED}failed to create Boot Image, exiting ...${TXTCLR}"
   echo " "
   time_end=$(date +%s.%N)
-  echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
+  echo -e "${BLDYLW}Total time elapsed: ${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
 
@@ -324,5 +324,5 @@ echo -e "${BLDGRN}	#############################	${TXTCLR}"
 echo -e "${TXTRED}	# Script completed, exiting #	${TXTCLR}"
 echo -e "${BLDGRN}	#############################	${TXTCLR}"
 echo " "
-echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
+echo -e "${BLDYLW}Total time elapsed: ${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
 exit 0
