@@ -14,7 +14,7 @@ TXTCLR='\e[0m'                  # Text Reset
 #
  
 ## Create TAR File for ODIN?
-ODIN_TAR=no             # yes/no (Currently disabled due modules not included in boot.img)
+ODIN_TAR=yes            # yes/no (Currently disabled due modules not included in boot.img)
  
 ## Create ZIP File for CWM? (needs a updater-template.zip in releasedir)
 CWM_ZIP=yes             # yes/no
