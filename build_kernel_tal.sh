@@ -27,6 +27,7 @@ export TOOLBIN="${KERNELDIR}/../bin"
 export INITRAMFS_SOURCE="${KERNELDIR}/../initramfs-sgs4-sprint"
 export INITRAMFS_TMP="/tmp/initrams-tmp"
 export RELEASEDIR="${KERNELDIR}/../releases"
+export USE_CCACHE=1
  
 ## For CWM ZIP
 export UPDATER_TEMPLATE=${KERNELDIR}/../releases/tempdir
