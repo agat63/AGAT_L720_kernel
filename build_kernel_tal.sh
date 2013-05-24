@@ -209,6 +209,11 @@ fi
  
 ## Build Modules
 nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-eabi-4.4.3/bin/arm-eabi-gcc" modules 2>&1 | tee compile-modules.log
+
+## Let's compile frandom with each kernel build
+cd  ${KERNELDIR}/../frandom-1.1
+make
+cd ${KERNELDIR}
  
 ## Check exitcode for module build
 if [ "$?" == "0" ];
@@ -222,7 +227,7 @@ else
   echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
- 
+
 ## Create Boot Image
 #
 # mkbootimg Commandline .. take care
@@ -252,7 +257,7 @@ else
 fi
  
 # Archive Name for ODIN/CWM/TWRP archives
-ARCNAME="$KRNRLS-`date +%Y%m%d%H%M%S`"
+ARCNAME="$KRNRLS-`date +%m%d%H%M`"
  
 ## Create ODIN Flashable TAR archiv ? (Not supported for now)
 if [ "${ODIN_TAR}" == "yes" ];
@@ -292,7 +297,7 @@ then
   echo -e "${TXTGRN}Copying Modules to update zip template: ${UPDATER_TMP}/system/lib/modules${TXTCLR}"
   mkdir -pv $UPDATER_TMP/system/lib/modules
   find $KERNELDIR -name '*.ko' -exec cp -av {} $UPDATER_TMP/system/lib/modules/ \;
-  cp /home/agat/frandom-1.1/frandom.ko $UPDATER_TMP/system/lib/modules/frandom.ko
+  cp $KERNELDIR/../frandom-1.1/frandom.ko $UPDATER_TMP/system/lib/modules/frandom.ko
   sleep 1
  
   # Strip Modules
