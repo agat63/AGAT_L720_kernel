@@ -138,13 +138,21 @@ static struct msm_bus_vectors grp3d_max_vectors[] = {
 		.src = MSM_BUS_MASTER_GRAPHICS_3D,
 		.dst = MSM_BUS_SLAVE_EBI_CH0,
 		.ab = 0,
+#ifdef CONFIG_KGSL_GPUOC
 		.ib = KGSL_CONVERT_TO_MBPS(4600),
+#else
+		.ib = KGSL_CONVERT_TO_MBPS(4264),
+#endif
 	},
 	{
 		.src = MSM_BUS_MASTER_GRAPHICS_3D_PORT1,
 		.dst = MSM_BUS_SLAVE_EBI_CH0,
 		.ab = 0,
+#ifdef CONFIG_KGSL_GPUOC
 		.ib = KGSL_CONVERT_TO_MBPS(4600),
+#else
+		.ib = KGSL_CONVERT_TO_MBPS(4264),
+#endif
 	},
 };
 
@@ -220,6 +228,7 @@ static struct kgsl_device_iommu_data kgsl_3d0_iommu_data[] = {
 
 static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 	.pwrlevel = {
+#ifdef CONFIG_KGSL_GPUOC
 		{
 			.gpu_freq = 533000000,
 			.bus_freq = 4,
@@ -230,6 +239,7 @@ static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 			.bus_freq = 4,
 			.io_fraction = 0,
 		},
+#endif
 		{
 			.gpu_freq = 400000000,
 			.bus_freq = 4,
@@ -256,7 +266,11 @@ static struct kgsl_device_platform_data kgsl_3d0_pdata = {
 		},
 	},
 	.init_level = 1,
+#ifdef CONFIG_KGSL_GPUOC
 	.num_levels = 7,
+#else
+	.num_levels = 5,
+#endif
 	.set_grp_async = NULL,
 	.idle_timeout = HZ/10,
 	.nap_allowed = true,
@@ -287,7 +301,11 @@ void __init apq8064_init_gpu(void)
 	unsigned int version = socinfo_get_version();
 
 	if (cpu_is_apq8064ab())
+#ifdef CONFIG_KGSL_GPUOC
 		kgsl_3d0_pdata.pwrlevel[0].gpu_freq = 533000000;
+#else
+		kgsl_3d0_pdata.pwrlevel[0].gpu_freq = 450000000;
+#endif
 	if (SOCINFO_VERSION_MAJOR(version) == 2) {
 		kgsl_3d0_pdata.chipid = ADRENO_CHIPID(3, 2, 0, 2);
 	} else {
