@@ -295,10 +295,10 @@ then
 
   # Strip Modules
   #
-  # echo "  "
-  # echo -e "${TXTGRN}Striping Modules to save space${TXTCLR}"
-  # ${CROSS_COMPILE}strip --strip-unneeded $UPDATER_TMP/system/lib/modules/*
-  # sleep 1
+  echo "  "
+  echo -e "${TXTGRN}Striping Modules to save space${TXTCLR}"
+  ${CROSS_COMPILE}strip --strip-unneeded $UPDATER_TMP/system/lib/modules/*
+  sleep 1
 
   # Create Final ZIP
   #
