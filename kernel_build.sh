@@ -58,7 +58,7 @@ KRNRLS="DreamKernel-GT-I9505-v1.0.2TW"
 # Target Settings
 #
 export ARCH=arm
-export CROSS_COMPILE=/home/talustus/arm-galaxys2-androideabi/bin/galaxys2-
+export CROSS_COMPILE=/home/talustus/arm-galaxys4-androideabi/bin/galaxys4-
 export USE_SEC_FIPS_MODE=true
 
 if [ "${1}" != "" ];
