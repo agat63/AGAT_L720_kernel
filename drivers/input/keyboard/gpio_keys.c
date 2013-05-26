@@ -45,7 +45,7 @@ struct gpio_button_data {
 	spinlock_t lock;
 	bool disabled;
 	bool key_pressed;
-#ifdef KEY_BOOSTER
+	#ifdef KEY_BOOSTER
 	struct delayed_work	work_dvfs_off;
 	struct delayed_work	work_dvfs_chg;
 	bool dvfs_lock_status;
@@ -437,12 +437,13 @@ static void gpio_keys_gpio_work_func(struct work_struct *work)
 {
 	struct gpio_button_data *bdata =
 		container_of(work, struct gpio_button_data, work);
+#ifdef KEY_BOOSTER
 	const struct gpio_keys_button *button = bdata->button;
 	int state = (gpio_get_value_cansleep(button->gpio) ? 1 : 0) ^ button->active_low;
-
+#endif
 	gpio_keys_gpio_report_event(bdata);
 #ifdef KEY_BOOSTER
-	if (button->code == KEY_HOMEPAGE)
+	if (button->code == KEY_HOME)
 		gpio_key_set_dvfs_lock(bdata, !!state);
 #endif
 }
@@ -634,7 +635,7 @@ static void flip_cover_work(struct work_struct *work)
 
 	if (comp_val[0] == comp_val[1]) {
 		ddata->flip_cover = gpio_get_value(ddata->gpio_flip_cover);
-	
+
 		printk(KERN_DEBUG "[keys] %s : %d\n",
 			__func__, ddata->flip_cover);
 
@@ -646,7 +647,7 @@ static void flip_cover_work(struct work_struct *work)
 	}
 #else
 	ddata->flip_cover = gpio_get_value(ddata->gpio_flip_cover);
-	
+
 	printk(KERN_DEBUG "[keys_no_delay] %s : %d\n",__func__, ddata->flip_cover);
 
 	input_report_switch(ddata->input, SW_FLIP, ddata->flip_cover);
@@ -677,7 +678,7 @@ static int gpio_keys_open(struct input_dev *input)
 	printk(KERN_DEBUG"[HALL_IC] : %s\n", __func__);
 
 	INIT_DELAYED_WORK(&ddata->flip_cover_dwork, flip_cover_work);
-	
+
 	ret =
 		request_threaded_irq(
 		irq, NULL,
@@ -961,6 +962,10 @@ static int __devinit gpio_keys_probe(struct platform_device *pdev)
 		error = gpio_keys_setup_key(pdev, input, bdata, button);
 		if (error)
 			goto fail2;
+
+		if (button->wakeup)
+			wakeup = 1;
+	}
 #ifdef KEY_BOOSTER
 		error = gpio_key_init_dvfs(bdata);
 		if (error < 0) {
@@ -968,9 +973,6 @@ static int __devinit gpio_keys_probe(struct platform_device *pdev)
 			goto fail2;
 		}
 #endif
-		if (button->wakeup)
-			wakeup = 1;
-	}
 	error = sysfs_create_group(&pdev->dev.kobj, &gpio_keys_attr_group);
 	if (error) {
 		dev_err(dev, "Unable to export keys/switches, error: %d\n",

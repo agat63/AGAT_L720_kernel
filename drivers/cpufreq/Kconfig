@@ -294,6 +294,11 @@ config CPUFREQ_LIMIT_MAX_FREQ
 	help
 	  Limit Max Freq while screen is on for Intellidemand governor
 
+config SEC_DVFS_BOOSTER
+    bool "DVFS input booster"
+    default y
+    depends on SEC_DVFS
+
 menu "x86 CPU frequency scaling drivers"
 depends on X86
 source "drivers/cpufreq/Kconfig.x86"

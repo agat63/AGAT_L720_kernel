@@ -146,11 +146,8 @@ config DEFAULT_IOSCHED
 	default "deadline" if DEFAULT_DEADLINE
 	default "row" if DEFAULT_ROW
 	default "cfq" if DEFAULT_CFQ
-<<<<<<< HEAD
 	default "sio" if DEFAULT_SIO
-=======
 	default "fiops" if DEFAULT_FIOPS
->>>>>>> 97a0775... block: fiops ioscheduler core
 	default "bfq" if DEFAULT_BFQ
 	default "noop" if DEFAULT_NOOP
 
