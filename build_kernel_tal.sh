@@ -296,8 +296,11 @@ then
   echo "  "
   echo -e "${TXTGRN}Copying Modules to update zip template: ${UPDATER_TMP}/system/lib/modules${TXTCLR}"
   mkdir -pv $UPDATER_TMP/system/lib/modules
+  # mkdir -pv $UPDATER_TMP/system/xbin
   find $KERNELDIR -name '*.ko' -exec cp -av {} $UPDATER_TMP/system/lib/modules/ \;
   cp $KERNELDIR/../frandom-1.1/frandom.ko $UPDATER_TMP/system/lib/modules/frandom.ko
+  # cp $KERNELDIR/../frandom-1.1/mount.exfat-fuse $UPDATER_TMP/system/xbin/mount.exfat-fuse
+  # chmod 755 $UPDATER_TMP/system/xbin/mount.exfat-fuse
   sleep 1
  
   # Strip Modules
