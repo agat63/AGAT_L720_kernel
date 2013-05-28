@@ -45,7 +45,7 @@
 
 #include "krait-defines.h"
 
-#define FREQ_TABLE_SIZE		40
+#define FREQ_TABLE_SIZE		36
 
 /* MUX source selects. */
 #define PRI_SRC_SEL_SEC_SRC	0
