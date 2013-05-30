@@ -51,8 +51,7 @@ export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
 # Version of this Build
 #
 ## 1.0 for initial build
-KRNRLS="DreamKernel-GT-I9505-v1.0.2TW"
-
+KRNRLS="DreamKernel-GT-I9505-v1.0.2TW4"
 
 #
 # Target Settings
