@@ -71,6 +71,24 @@ kernel/config_data.h
 scripts/recordmcount
 kernel/usr/*
 Package/*
+firmware/* 
+arch/arm/include/generated/
+firmware/*.gen.S
+firmware/ssp.fw
+firmware/ssp_crashed.fw
+firmware/ssp_rev03.fw
+firmware/tsp_atmel/*.gen.S
+firmware/tsp_atmel/mXT540S.fw
+firmware/tsp_atmel/mXT540Si.fw
+firmware/tsp_synaptics/*.gen.S
+firmware/tsp_synaptics/synaptics_a1.fw
+firmware/tsp_synaptics/synaptics_b0_3_4.fw
+firmware/tsp_synaptics/synaptics_b0_4_0.fw
+firmware/tsp_synaptics/synaptics_b0_4_3.fw
+firmware/tsp_synaptics/synaptics_b0_5_1.fw
+firmware/tsp_synaptics/synaptics_b0_5_1_fac.fw
+firmware/tsp_synaptics/synaptics_b0_fac.fw
+
 
 arch/arm/boot/compressed/lib1funcs.S
 firmware/tsp_melfas/CORE.fw
@@ -82,9 +100,19 @@ firmware/tsp_melfas/PUBL.fw.gen.S
 scripts/bin2c
 scripts/genksyms/genksyms
 scripts/genksyms/keywords.c
+scripts/genksyms/keywords.hash.c
+scripts/genksyms/lex.lex.c
+scripts/genksyms/parse.tab.c
+scripts/genksyms/parse.tab.h
 scripts/genksyms/lex.c
 scripts/genksyms/parse.c
 scripts/genksyms/parse.h
+scripts/kconfig/zconf.lex.c
+scripts/selinux/genheaders/genheaders
+scripts/selinux/mdp/mdp
+security/selinux/av_permissions.h
+security/selinux/flask.h
+
 
 #
 # Top-level generic files
