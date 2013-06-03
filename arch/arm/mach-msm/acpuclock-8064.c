@@ -154,7 +154,7 @@ static struct l2_level l2_freq_tbl[] __initdata = {
 #endif
 	{ }
 };
-
+/*
 static struct acpu_level tbl_slow[] __initdata = {
 	{ 1, {   384000, PLL_8, 0, 0x00 }, L2(0),   950000 },
 	{ 0, {   432000, HFPLL, 2, 0x20 }, L2(5),   975000 },
@@ -574,7 +574,7 @@ static struct acpu_level tbl_PVS1_2000MHz[] __initdata = {
 #endif
 	{ 0, { 0 } }
 };
-
+*/
 static struct acpu_level tbl_PVS2_2000MHz[] __initdata = {
 #ifdef CONFIG_LOW_CPUCLOCKS
 	{ 1, {   162000, HFPLL, 2, 0x0C }, L2(0),   850000 },
@@ -599,6 +599,7 @@ static struct acpu_level tbl_PVS2_2000MHz[] __initdata = {
 	{ 1, {  1566000, HFPLL, 1, 0x3A }, L2(15), 1075000 },
 	{ 1, {  1674000, HFPLL, 1, 0x3E }, L2(15), 1112500 },
 	{ 1, {  1782000, HFPLL, 1, 0x42 }, L2(15), 1162500 },
+	{ 1, {  1836000, HFPLL, 1, 0x44 }, L2(15), 1187500 },
 	{ 1, {  1890000, HFPLL, 1, 0x46 }, L2(15), 1212500 },
 #ifdef CONFIG_CPU_OVERCLOCK
 	{ 1, {  1944000, HFPLL, 1, 0x48 }, L2(15), 1237500 },
@@ -613,7 +614,7 @@ static struct acpu_level tbl_PVS2_2000MHz[] __initdata = {
 #endif
 	{ 0, { 0 } }
 };
-
+/*
 static struct acpu_level tbl_PVS3_2000MHz[] __initdata = {
 #ifdef CONFIG_LOW_CPUCLOCKS
 	{ 1, {   162000, HFPLL, 2, 0x0C }, L2(0),   850000 },
@@ -769,8 +770,9 @@ static struct acpu_level tbl_PVS6_2000MHz[] __initdata = {
 #endif
 	{ 0, { 0 } }
 };
-
+*/
 static struct pvs_table pvs_tables[NUM_SPEED_BINS][NUM_PVS] __initdata = {
+/*
 	[0][PVS_SLOW]    = {tbl_slow, sizeof(tbl_slow),     0 },
 	[0][PVS_NOMINAL] = {tbl_nom,  sizeof(tbl_nom),  25000 },
 	[0][PVS_FAST]    = {tbl_fast, sizeof(tbl_fast), 25000 },
@@ -786,7 +788,9 @@ static struct pvs_table pvs_tables[NUM_SPEED_BINS][NUM_PVS] __initdata = {
 
 	[2][0] = { tbl_PVS0_2000MHz, sizeof(tbl_PVS0_2000MHz),     0 },
 	[2][1] = { tbl_PVS1_2000MHz, sizeof(tbl_PVS1_2000MHz),     25000 },
+*/
 	[2][2] = { tbl_PVS2_2000MHz, sizeof(tbl_PVS2_2000MHz),     25000 },
+/*
 	[2][3] = { tbl_PVS3_2000MHz, sizeof(tbl_PVS3_2000MHz),     25000 },
 	[2][4] = { tbl_PVS4_2000MHz, sizeof(tbl_PVS4_2000MHz),     25000 },
 	[2][5] = { tbl_PVS5_2000MHz, sizeof(tbl_PVS5_2000MHz),     25000 },
@@ -799,6 +803,7 @@ static struct pvs_table pvs_tables[NUM_SPEED_BINS][NUM_PVS] __initdata = {
 	[14][4] = { tbl_PVS4_1512MHz, sizeof(tbl_PVS4_1512MHz),     25000 },
 	[14][5] = { tbl_PVS5_1512MHz, sizeof(tbl_PVS5_1512MHz),     25000 },
 	[14][6] = { tbl_PVS6_1512MHz, sizeof(tbl_PVS6_1512MHz),     25000 },
+*/
 };
 
 static struct acpuclk_krait_params acpuclk_8064_params __initdata = {
