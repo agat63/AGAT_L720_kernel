@@ -15,10 +15,14 @@
  *
  */
 #ifdef CONFIG_CPU_OVERCLOCK
+#ifdef CONFIG_OC_ULTIMATE
 #define OVERCLOCK_EXTRA_FREQS	7
 #else
+#define OVERCLOCK_EXTRA_FREQS	4
+#endif // OC Ultimate
+#else
 #define OVERCLOCK_EXTRA_FREQS	0
-#endif
+#endif // OC
 
 #ifdef CONFIG_LOW_CPUCLOCKS
 #define FREQ_TABLE_SIZE		(40 + OVERCLOCK_EXTRA_FREQS)
