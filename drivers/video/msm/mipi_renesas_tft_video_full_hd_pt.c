@@ -20,30 +20,30 @@ static struct msm_panel_info pinfo;
 static struct mipi_panel_data mipi_pd;
 
 enum {
-	GAMMA_30CD  =   7, // MIN 10 from platform
-	GAMMA_40CD  =  14,
-	GAMMA_50CD  =  20,
-	GAMMA_60CD  =  24,
-	GAMMA_70CD  =  28,
-	GAMMA_80CD  =  32,
-	GAMMA_90CD  =  36,
-	GAMMA_100CD =  40,
-	GAMMA_110CD =  44,
-	GAMMA_120CD =  48,
-	GAMMA_130CD =  52,
-	GAMMA_140CD =  56,
-	GAMMA_150CD =  60, // DEF 150 from platform
-	GAMMA_160CD =  72,
-	GAMMA_170CD =  84,
-	GAMMA_180CD =  96,
-	GAMMA_190CD = 108,
-	GAMMA_200CD = 120,
-	GAMMA_210CD = 132,
-	GAMMA_220CD = 144,
-	GAMMA_230CD = 156,
-	GAMMA_240CD = 168,
-	GAMMA_250CD = 182, // MAX 255 from platform
-	GAMMA_300CD = 182,
+	GAMMA_30CD  =   8, // MIN 10 from platform
+	GAMMA_40CD  =  16,
+	GAMMA_50CD  =  22,
+	GAMMA_60CD  =  28,
+	GAMMA_70CD  =  34,
+	GAMMA_80CD  =  40,
+	GAMMA_90CD  =  46,
+	GAMMA_100CD =  52,
+	GAMMA_110CD =  58,
+	GAMMA_120CD =  64,
+	GAMMA_130CD =  70,
+	GAMMA_140CD =  76,
+	GAMMA_150CD =  82, // DEF 150 from platform
+	GAMMA_160CD =  94,
+	GAMMA_170CD = 106,
+	GAMMA_180CD = 118,
+	GAMMA_190CD = 130,
+	GAMMA_200CD = 142,
+	GAMMA_210CD = 154,
+	GAMMA_220CD = 166,
+	GAMMA_230CD = 178,
+	GAMMA_240CD = 190,
+	GAMMA_250CD = 202, // MAX 255 from platform
+	GAMMA_300CD = 202,
 };
 
 
@@ -63,12 +63,12 @@ static char renesas_manufacture_cmd_access_on[] = {
 
 static char renesas_brightness_setting[] = {
 	0x51,
-	0xB6, /*0xFF,*/
+	0xCA, /*0xFF,*/
 };
 
 static char renesas_brightness_packet[] = {
 	0x51,
-	0xB6, /*0xFF, */
+	0xCA, /*0xFF, */
 };
 
 static char renesas_cabc_control[] = {
@@ -93,11 +93,6 @@ static char renesas_backlight_control[] = {
 	0x2C,
 };
 
-static char renesas_teon_control[] = {
-	0x35,
-	0x01,
-};
-
 static char renesas_memory_access_control[] = {
 	0x36,
 	0xC0,
@@ -117,9 +112,6 @@ static struct dsi_cmd_desc renesas_ready_to_on_cmds[] = {
 
 	{DTYPE_DCS_LWRITE, 1, 0, 0, 0,
 		sizeof(renesas_backlight_control), renesas_backlight_control},
-
-	{DTYPE_DCS_LWRITE, 1, 0, 0, 0,
-		sizeof(renesas_teon_control), renesas_teon_control},
 
 	{DTYPE_DCS_LWRITE, 1, 0, 0, 0,
 		sizeof(renesas_sleep_out), renesas_sleep_out},
@@ -287,10 +279,7 @@ static int brightness_control(int bl_level)
 		renesas_brightness_packet[1] = value & 0xFF;
 		renesas_brightness_packet[1] = (value >> 8) & 0xFF;
 	} else
-	{
 		renesas_brightness_packet[1] =  level & 0xFF;
-		renesas_brightness_setting[1] = level & 0xFF;
-	}
 
 	return 0;
 }
@@ -363,8 +352,6 @@ static int __init mipi_cmd_samsung_tft_full_hd_pt_init(void)
 #endif
 	pinfo.xres = 1080;
 	pinfo.yres = 1920;
-	pinfo.height = 111;
-	pinfo.width = 62;
 
 	pinfo.type = MIPI_VIDEO_PANEL;
 	pinfo.pdest = DISPLAY_1;

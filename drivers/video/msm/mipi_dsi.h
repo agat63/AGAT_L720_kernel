@@ -17,10 +17,6 @@
 #include <mach/scm-io.h>
 #include <linux/list.h>
 
-#if defined(CONFIG_ESD_ERR_FG_RECOVERY)
-#include "mdnie_lite_tuning.h"
-#endif
-
 #ifdef BIT
 #undef BIT
 #endif
@@ -374,9 +370,5 @@ int mipi_runtime_clk_change(int fps);
 
 void mipi_dsi_irq_set(uint32 mask, uint32 irq);
 void mdp4_dsi_video_wait4dmap_for_dsi(int cndx);
-
-#if defined(CONFIG_ESD_ERR_FG_RECOVERY)
-void esd_recovery(void);
-#endif
 
 #endif /* MIPI_DSI_H */

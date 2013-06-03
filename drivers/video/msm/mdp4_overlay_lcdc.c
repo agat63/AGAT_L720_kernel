@@ -713,7 +713,6 @@ int mdp4_lcdc_off(struct platform_device *pdev)
 	msleep(20);	/* >= 17 ms */
 
 	complete_all(&vctrl->vsync_comp);
-	vctrl->wait_vsync_cnt = 0;
 	if (pipe == NULL)
 		return -EINVAL;
 	if (pipe->ov_blt_addr) {
