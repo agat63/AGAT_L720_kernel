@@ -56,12 +56,12 @@ KRNRLS="AGAT_GS4_v0.3.0"
  
  
 #
-# Target Settings
+## Target Settings
 #
 export ARCH=arm
 export CROSS_COMPILE=/home/agat/GS4/kernel-extras/arm-4.7.4/bin/arm-galaxys4-linux-gnueabi-
 export USE_SEC_FIPS_MODE=true
- 
+
 if [ "${1}" != "" ];
 then
   if [ -d  $1 ];
@@ -77,7 +77,7 @@ then
     exit 1
   fi
 fi
- 
+
 # make sure we have no stale config
 make -j8 distclean
  
@@ -101,40 +101,40 @@ then
   make ARCH=arm VARIANT_DEFCONFIG=${ARCH_CONF} SELINUX_DEFCONFIG=${SELINUX_CONF} ${DREAM_DEFCONF} 
   echo -e "${TXTYLW}Kernel config created ...${TXTCLR}"
 fi
- 
+
 . $KERNELDIR/.config
- 
+
 # remove Files of old/previous Builds
 #
 echo -e "${TXTYLW}Deleting Files of previous Builds ...${TXTCLR}"
 # make -j8 clean 2>&1 | grcat conf.gcc
 # echo "0" > $KERNELDIR/.version
- 
+
 # Remove Old initramfs/updater template
 if [ -d $UPDATER_TMP ];
 then
   echo -e "${TXTYLW}Deleting old updater template${TXTCLR}"
   rm -rf $UPDATER_TMP
 fi
- 
+
 if [ -d $INITRAMFS_TMP ];
 then
   echo -e "${TXTYLW}Deleting old initramfs temp files${TXTCLR}"
   rm -rf $INITRAMFS_TMP
 fi
- 
+
 if [ -f $INITRAMFS_TMP.cpio ];
 then
   echo -e "${TXTYLW}Deleting old initramfs cpio Archive${TXTCLR}"
   rm -f $INITRAMFS_TMP.cpio
 fi
- 
+
 if [ -f $INITRAMFS_TMP.img ];
 then
   echo -e "${TXTYLW}Deleting old initramfs image${TXTCLR}"
   rm -f $INITRAMFS_TMP.img
 fi
- 
+
 # Remove previous Kernelfiles
 if [ -f $KERNELDIR/boot.img ];
 then
@@ -144,7 +144,7 @@ then
   rm $KERNELDIR/arch/arm/boot/kernel
   rm $KERNELDIR/arch/arm/boot/zImage
 fi
- 
+
 ## INITRAMFS ##
 #
 # copy initramfs files to tmp directory
@@ -152,39 +152,39 @@ fi
 echo -e "${TXTGRN}Copying initramfs Filesystem to: ${INITRAMFS_TMP}${TXTCLR}"
 cp -vax $INITRAMFS_SOURCE $INITRAMFS_TMP
 sleep 1
- 
+
 # remove repository realated files
 #
 echo -e "${TXTGRN}Deleting Repository related Files (.git, .hg etc)${TXTCLR}"
 find $INITRAMFS_TMP -name .git -exec rm -rf {} \;
 find $INITRAMFS_TMP -name EMPTY_DIRECTORY -exec rm -rf {} \;
 rm -rf $INITRAMFS_TMP/.hg
- 
+
 # create the initramfs cpio archive
 #
 $TOOLBIN/mkbootfs $INITRAMFS_TMP > $INITRAMFS_TMP.cpio
 echo -e "${TXTGRN}Unpacked Initramfs: $(ls -lh $INITRAMFS_TMP.cpio)${TXTCLR}"
 echo "  "
- 
+
 # Create gziped initramfs
 #
 echo -e "${TXTGRN}compressing InitRamfs...${TXTCLR}"
 $TOOLBIN/minigzip < $INITRAMFS_TMP.cpio > $INITRAMFS_TMP.img
 echo -e "${TXTGRN}Final gzip compressed Initramfs: $(ls -lh $INITRAMFS_TMP.img)${TXTCLR}"
- 
+
 # delete temp initramfs files/dirs
 #
 echo "  "
 echo -e "${TXTGRN}Deleting Temp DIR/CPIO: ($INITRAMFS_TMP)${TXTCLR}"
 rm -rf $INITRAMFS_TMP
- 
+
 echo -e "${TXTGRN}Deleting Temp cpio Archive: ($INITRAMFS_TMP.cpio)${TXTCLR}"
 rm -f $INITRAMFS_TMP.cpio
- 
+
 ## Start Final Kernel Build
 #
 echo -e "${TXTYLW}Starting final Build: Stage 2${TXTCLR}"
- 
+
 ## Build zImage
 nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-4.7.4/bin/arm-galaxys4-linux-gnueabi-gcc" zImage 2>&1 | tee compile-zImage.log
  
@@ -206,7 +206,7 @@ else
   echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
- 
+
 ## Build Modules
 nice -n 10 make -j8 CC="ccache /home/agat/GS4/kernel-extras/arm-4.7.4/bin/arm-galaxys4-linux-gnueabi-gcc" modules 2>&1 | tee compile-modules.log
 
@@ -235,7 +235,7 @@ fi
 echo " "
 echo -e "${TXTGRN}creating Boot Image (boot.img)!${TXTCLR}"
 $TOOLBIN/mkbootimg --kernel $KERNELDIR/arch/arm/boot/kernel --ramdisk $INITRAMFS_TMP.img --cmdline "console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3" --base 0x80200000 --pagesize 2048 --ramdisk_offset 0x02000000 --output $KERNELDIR/boot.img
- 
+
 ## Check for boot.img
 #
 if [ -f $KERNELDIR/boot.img ];
@@ -255,7 +255,7 @@ else
   echo -e "${BLDYLW}Total time elapsed: ${TCTCLR}${TXTGRN}$(echo "($time_end - $time_start) / 60"|bc ) ${TXTYLW}minutes${TXTGRN} ($(echo "$time_end - $time_start"|bc ) ${TXTYLW}seconds) ${TXTCLR}"
   exit 1
 fi
- 
+
 # Archive Name for ODIN/CWM/TWRP archives
 ARCNAME="$KRNRLS-`date +%m%d%H%M`"
  
@@ -270,7 +270,7 @@ else
   echo -e "${BLDRED}Skipping ODIN-TAR creation${TXTCLR}"
   echo "   "
 fi
- 
+
 ## Check for update template (CWM/TWRP)
 if [ ! -d $UPDATER_TEMPLATE ];
 then
@@ -278,19 +278,19 @@ then
   echo -e "${BLDRED}Updater Template not found!${TXTCLR}"
   echo "  "
 fi
- 
+
 ## Create CWM-ZIP ##
 if [ "${CWM_ZIP}" == "yes" ];
 then
   ## Update ZIP template ##
- 
+
   # copy updater zip template files to tmp directory
   #
   echo "  "
   echo -e "${TXTGRN}Copying update zip template to: ${UPDATER_TMP}${TXTCLR}"
   cp -vax $UPDATER_TEMPLATE $UPDATER_TMP
   sleep 1
- 
+
   # copy modules into update zip template
   #
   echo "  "
@@ -302,14 +302,14 @@ then
   # cp $KERNELDIR/../frandom-1.1/mount.exfat-fuse $UPDATER_TMP/system/xbin/mount.exfat-fuse
   # chmod 755 $UPDATER_TMP/system/xbin/mount.exfat-fuse
   sleep 1
- 
+
   # Strip Modules
   #
-  # echo "  "
-  # echo -e "${TXTGRN}Striping Modules to save space${TXTCLR}"
-  # ${CROSS_COMPILE}strip --strip-unneeded $UPDATER_TMP/system/lib/modules/*
-  # sleep 1
- 
+  echo "  "
+  echo -e "${TXTGRN}Striping Modules to save space${TXTCLR}"
+  ${CROSS_COMPILE}strip --strip-unneeded $UPDATER_TMP/system/lib/modules/*
+  sleep 1
+
   # Create Final ZIP
   #
   echo "  "
@@ -326,7 +326,7 @@ else
   echo -e "${BLDRED}Skipping CWM-ZIP creation${TXTCLR}"
   echo "  "
 fi
- 
+
 # finished? get elapsed time
 time_end=$(date +%s.%N)
 echo "  "
