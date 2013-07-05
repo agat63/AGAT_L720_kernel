@@ -106,7 +106,7 @@ static struct msm_bus_paths bw_level_tbl[] __initdata = {
 	[3] = BW_MBPS(2128), /* At least 266 MHz on bus. */
 	[4] = BW_MBPS(3200), /* At least 400 MHz on bus. */
 	[5] = BW_MBPS(4264), /* At least 533 MHz on bus. */
-	// [6] = BW_MBPS(4600), /* At least 600 MHz on bus. */
+	[6] = BW_MBPS(4600), /* At least 600 MHz on bus. */
 };
 
 static struct msm_bus_scale_pdata bus_scale_data __initdata = {
@@ -134,8 +134,8 @@ static struct l2_level l2_freq_tbl[] __initdata = {
 	[14] = { { 1080000, HFPLL, 1, 0x28 }, 1150000, 1150000, 5 },
 	[15] = { { 1134000, HFPLL, 1, 0x2A }, 1150000, 1150000, 5 },
 	[16] = { { 1188000, HFPLL, 1, 0x2C }, 1150000, 1150000, 5 },
-	[17] = { { 1242000, HFPLL, 1, 0x2E }, 1250000, 1250000, 5 },
-	[18] = { { 1296000, HFPLL, 1, 0x30 }, 1250000, 1250000, 5 },
+	[17] = { { 1242000, HFPLL, 1, 0x2E }, 1250000, 1250000, 6 },
+	[18] = { { 1296000, HFPLL, 1, 0x30 }, 1250000, 1250000, 6 },
 	{ }
 };
 
@@ -165,11 +165,11 @@ static struct acpu_level tbl_PVS2_2000MHz[] __initdata = {
 	{ 1, {  1944000, HFPLL, 1, 0x48 }, L2(15), 1237500 },
 	{ 1, {  1998000, HFPLL, 1, 0x4A }, L2(16), 1262500 },
 	{ 1, {  2052000, HFPLL, 1, 0x4C }, L2(16), 1287500 },
-	{ 1, {  2106000, HFPLL, 1, 0x4E }, L2(16), 1312500 },
+	{ 1, {  2106000, HFPLL, 1, 0x4E }, L2(17), 1312500 },
 #ifdef CONFIG_OC_ULTIMATE
-	{ 1, {  2160000, HFPLL, 1, 0x50 }, L2(16), 1337500 },
-	{ 1, {  2214000, HFPLL, 1, 0x52 }, L2(17), 1362500 },
-	{ 1, {  2268000, HFPLL, 1, 0x54 }, L2(17), 1387500 },
+	{ 1, {  2160000, HFPLL, 1, 0x50 }, L2(17), 1337500 },
+	{ 1, {  2214000, HFPLL, 1, 0x52 }, L2(18), 1362500 },
+	{ 1, {  2268000, HFPLL, 1, 0x54 }, L2(18), 1387500 },
 #endif // OC Ultimate
 #endif // OC
 	{ 0, { 0 } }
