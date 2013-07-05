@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.4.49 Kernel Configuration
+# Linux/arm 3.4.25 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -1358,7 +1358,6 @@ CONFIG_SCSI_DMA=y
 CONFIG_SCSI_TGT=y
 # CONFIG_SCSI_NETLINK is not set
 CONFIG_SCSI_PROC_FS=y
-CONFIG_DYNAMIC_FSYNC=y
 
 #
 # SCSI support type (disk, tape, CD-ROM)
