@@ -24,7 +24,7 @@ CWM_ZIP=yes             # yes/no
 ##
 export KERNELDIR=`readlink -f .`
 export TOOLBIN="${KERNELDIR}/../bin"
-export INITRAMFS_SOURCE="${KERNELDIR}/../ramdisk-030"
+export INITRAMFS_SOURCE="${KERNELDIR}/../initramfs-sgs4-sprint"
 export INITRAMFS_TMP="/tmp/initrams-tmp"
 export RELEASEDIR="${KERNELDIR}/../releases"
 export USE_CCACHE=1
@@ -52,7 +52,7 @@ export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
 # Version of this Build
 #
 ## 1.0 for initial build
-KRNRLS="AGAT_GS4_v0.4.0"
+KRNRLS="AGAT_GS4_v0.4.2"
  
  
 #
