@@ -1,0 +1,3 @@
+[submodule "fs/exfat"]
+	path = fs/exfat
+	url = git@bitbucket.org:Talustus/dreamkernel_exfat-nofuse.git
