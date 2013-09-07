@@ -27,6 +27,7 @@ export TOOLBIN="${KERNELDIR}/../bin"
 export INITRAMFS_SOURCE="${KERNELDIR}/../initramfs-sgs4-sprint"
 export INITRAMFS_TMP="/tmp/initrams-tmp"
 export RELEASEDIR="${KERNELDIR}/../releases"
+export CCACHE_DIR="/home/agat/.ccache"
 export USE_CCACHE=1
  
 ## For CWM ZIP
@@ -52,14 +53,26 @@ export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
 # Version of this Build
 #
 ## 1.0 for initial build
-KRNRLS="AGAT_GS4_v0.4.2"
+KRNRLS="AGAT_GS4_v0.5.2"
  
  
 #
 ## Target Settings
 #
 export ARCH=arm
+
+# Choose Propper Compiler setup
+if [ "${USE_CCACHE}" == "1" ];
+then
+echo -e "${TXTGRN}Using ccache Compiler Cache ..${TXTCLR}"
+export CCACHE_DIR="/home/agat/.ccache"
 export CROSS_COMPILE=/home/agat/GS4/kernel-extras/arm-4.7.4/bin/arm-galaxys4-linux-gnueabi-
+else
+echo -e "${TXTYLW}NOT using ccache Compiler Cache ..${TXTCLR}"
+export CROSS_COMPILE=/home/agat/GS4/kernel-extras/arm-4.7.4/bin/arm-galaxys4-linux-gnueabi-
+fi
+
+
 export USE_SEC_FIPS_MODE=true
 
 if [ "${1}" != "" ];
