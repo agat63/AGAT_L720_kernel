@@ -53,7 +53,7 @@ export KBUILD_BUILD_HOST=`hostname | sed 's|ip-projects.de|dream-irc.com|g'`
 # Version of this Build
 #
 ## 1.0 for initial build
-KRNRLS="AGAT_GS4_v0.5.2"
+KRNRLS="AGAT_GS4_v0.5.4"
  
  
 #
